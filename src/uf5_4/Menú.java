@@ -17,6 +17,6 @@ public class Menú {
         String nom;
         System.out.println("Quin nom vols afegir? ");
         nom = s.nextLine();
-        System.out.println("" + llista.afegirNom(nom));
+        llista.afegirNom(nom);
     }
     }

@@ -19,14 +19,13 @@ Afegiu una classe prova que instanciï un objecte LlistaDeNoms i provi els seus 
 package uf5_4;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *
  * @author Ramon
  */
-public class LlistaDeNoms{
-    
+public class LlistaDeNoms {
+
     private ArrayList llista;
 
     public LlistaDeNoms() {
@@ -38,21 +37,23 @@ public class LlistaDeNoms{
         return llista.size();
     }
 
-    String afegirNom(String nom) throws Exception{
-        llista.add(nom);
+    String afegirNom(String nom) throws Exception {
         RepetitException e = new RepetitException();
-        for (int i = 0; i < llista.size(); i++){
-        if (nom.equals(llista.get(i+1))) {
-            throw new Exception(e);
-    }
+        for (int i = 0; i < llista.size(); i++) {
+            if (!nom.equals(llista.get(i))) {
+                llista.add(nom);
+            } else {
+                throw new Exception(e);
+            }
         }
         return nom;
     }
-    public class RepetitException extends Throwable{
+
+    public class RepetitException extends Throwable {
+
         public RepetitException() {
-        super("El nom esta repetit");
-    }
+            super("El nom esta repetit");
+        }
     }
 
 }
-
