@@ -29,7 +29,7 @@ public class LlistaDeNoms {
     private ArrayList llista;
 
     public LlistaDeNoms() {
-        this.llista = new ArrayList<String>();
+        this.llista = new ArrayList();
 
     }
 
@@ -40,13 +40,19 @@ public class LlistaDeNoms {
     String afegirNom(String nom) throws Exception {
         RepetitException e = new RepetitException();
         for (int i = 0; i < llista.size(); i++) {
-            if (!nom.equals(llista.get(i))) {
+            String str = (String) llista.get(i);
+            if (!nom.equals(str)) {
                 llista.add(nom);
+                System.out.println(llista.get(i));
+                
             } else {
                 throw new Exception(e);
             }
         }
-        return nom;
+        return null;
+    }
+    String insertarNomEnPosicio(int index, String nom){
+        return null;
     }
 
     public class RepetitException extends Throwable {
