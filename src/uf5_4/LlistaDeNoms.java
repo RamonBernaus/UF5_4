@@ -19,13 +19,17 @@ Afegiu una classe prova que instanciï un objecte LlistaDeNoms i provi els seus 
 package uf5_4;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
  * @author Ramon
  */
 public class LlistaDeNoms {
-
+    Scanner s = new Scanner (System.in);
     private ArrayList llista;
 
     public LlistaDeNoms() {
@@ -38,7 +42,7 @@ public class LlistaDeNoms {
     }
 
     String afegirNom(String nom) throws Exception {
-        RepetitException e = new RepetitException();
+        RepetitException repetit = new RepetitException();
         for (int i = 0; i < llista.size(); i++) {
             String str = (String) llista.get(i);
             if (!nom.equals(str)) {
@@ -46,19 +50,84 @@ public class LlistaDeNoms {
                 System.out.println(llista.get(i));
                 
             } else {
-                throw new Exception(e);
+                throw new Exception(repetit);
             }
         }
-        return null;
+        return nom;
     }
-    String insertarNomEnPosicio(int index, String nom){
-        return null;
-    }
+String InsertarNomEnPosicio(int index, String nom) throws Exception{
+ForaRangException forarang = new ForaRangException();
+    System.out.println("Digues en quina posicio vols insertar el nom: ");
+    index = s.nextInt();
+if (index <= llista.size()){
+    llista.add(index, nom);
+} else {
+    throw new Exception(forarang);
+}
+return nom;
+}
+
+String obtenirNom(int index) throws Exception{
+String nom = "";
+ForaRangException forarang = new ForaRangException();
+    System.out.println("Digues quina posicio vols veure: ");
+    index = s.nextInt();
+if (index <= llista.size()){
+    llista.get(index);
+} else {
+    throw new Exception(forarang);
+}
+return nom;
+}
+
+String eliminarNom(int index)  throws Exception{
+String nom = "";
+ForaRangException forarang = new ForaRangException();
+    System.out.println("Digues quina posicio vols elimanar: ");
+    index = s.nextInt();
+if (index <= llista.size()){
+    llista.remove(index);
+} else {
+    throw new Exception(forarang);
+}
+return nom;
+
+}
+
+String imprimirNoms(){
+String str = "";
+for(int i = 0 ; i<llista.size(); i++){
+    System.out.println(i + " " + llista.get(i));
+}
+return str; 
+}
+
+String buscarNom(String nom){
+Iterator<String> it = llista.iterator();
+String expresioRegular = nom;
+Pattern regles = Pattern.compile(expresioRegular);
+Matcher textAnalitzar = regles.matcher(nom);
+if (textAnalitzar.matches() == true){
+System.out.print("La cadena coincideix en la seva totalitat");
+while(it.hasNext()) {
+  System.out.println(it.next());
+}
+} else {
+    System.out.println("null");
+} return nom;
+}
 
     public class RepetitException extends Throwable {
 
         public RepetitException() {
             super("El nom esta repetit");
+        }
+    }
+
+    public class ForaRangException extends Throwable {
+
+        public ForaRangException() {
+            super("El numero es més gran que l'espai de la llista");
         }
     }
 
